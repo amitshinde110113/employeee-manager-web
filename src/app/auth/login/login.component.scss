@@ -1,0 +1,35 @@
+.main-content {
+  width: 50%;
+  border-radius: 20px;
+  box-shadow: 0 5px 5px rgba(0, 0, 0, 0.4);
+  margin: 5em auto;
+  min-height: 500px !important;
+
+  // display: flex;
+}
+.left_content {
+  background-color: #008080;
+  border-top-left-radius: 20px;
+  border-bottom-left-radius: 20px;
+  color: #fff;
+}
+.login_form {
+  background-color: #fff;
+  border-top-right-radius: 20px;
+  border-bottom-right-radius: 20px;
+  border-top: 1px solid #ccc;
+  border-right: 1px solid #ccc;
+}
+
+form {
+  padding: 0 2em;
+}
+.fa-user {
+  margin-top: 50%;
+  font-size: 5em;
+}
+.cst {
+  max-height: 500px !important;
+  overflow: auto;
+}
+

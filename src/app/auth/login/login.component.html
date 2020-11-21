@@ -1,0 +1,230 @@
+<!-- <div class="">
+  <div class="row main-content bg-success text-center">
+    <div class="col-md-4 text-center left_content">
+      <span class="company__logo">
+        <h2><span class="fa fa-android"></span></h2>
+      </span>
+      <h4 class="company_title">Your Company Logo</h4>
+    </div>
+    <div class="col-md-8 col-xs-12 col-sm-12 login_form ">
+      <div class="">
+        <div class="row">
+          <h2>Log In</h2>
+        </div>
+        <div class="row">
+          <form [formGroup]="loginForm">
+
+            <div class="card" *ngIf="isLoginView">
+              <div class="card-body">
+                <h5 class="card-title text-center">Sign In</h5>
+                <div class="form-label-group mt-2">
+                  <label for="inputEmail">Email address</label>
+                  <input formControlName="email" type="text" autocomplete="false" id="inputEmail" class="form-control"
+                    placeholder="Email address" required autofocus>
+                  <small *ngIf="loginForm.get('email').touched && loginForm.get('email').hasError('required')"
+                    class="text-danger">Email is required.</small>
+                  <small *ngIf="loginForm.get('email').touched && loginForm.get('email').hasError('pattern')"
+                    class="text-danger">Enter valid email.</small>
+
+                </div>
+                <div class="form-label-group mt-2">
+                  <label for="inputPassword">Password</label>
+                  <input formControlName="password" type="password" id="inputPassword" class="form-control"
+                    placeholder="Password" required>
+                  <small *ngIf="loginForm.get('password').touched && loginForm.get('password').hasError('required')"
+                    class="text-danger">Password is required.</small>
+                </div>
+                <button [disabled]="loginForm.invalid" class="btn btn-lg btn-primary btn-block text-uppercase mt-2"
+                  (click)="login()" type="button">Sign in</button>
+                <div class="form-label-group mt-2">
+                  <a for="inputPassword" href="javascript:void(0);" (click)="isLoginView=false">Dont have account ?
+                    Register
+                    here</a>
+                </div>
+              </div>
+            </div>
+          </form>
+          <form [formGroup]="signupForm">
+
+            <div class="card" *ngIf="!isLoginView">
+              <div class="card-body">
+                <h5 class="card-title text-center">Sign Up</h5>
+                <div class="form-label-group mt-2">
+                  <label for="inputEmail">Name</label>
+                  <input formControlName="name" type="text" id="inputName" class="form-control" placeholder="Name"
+                    required autofocus>
+                  <small *ngIf="signupForm.get('name').touched && signupForm.get('name').hasError('required')"
+                    class="text-danger">Name is required.</small>
+
+                </div>
+                <div class="form-label-group mt-2">
+                  <label for="inputEmail">Email address</label>
+                  <input formControlName="email" autocomplete="false" type="email" id="inputEmail" class="form-control"
+                    placeholder="Email address" required autofocus>
+                  <small *ngIf="signupForm.get('email').touched && signupForm.get('email').hasError('required')"
+                    class="text-danger">Email is required.</small>
+                  <small *ngIf="signupForm.get('email').touched && signupForm.get('email').hasError('pattern')"
+                    class="text-danger">Enter valid email.</small>
+
+                </div>
+                <div class="form-label-group mt-2">
+                  <label for="inputPassword">Password</label>
+                  <input formControlName="password" type="password" id="inputPassword" class="form-control"
+                    placeholder="Password" required>
+                  <small *ngIf="signupForm.get('password').touched && signupForm.get('password').hasError('required')"
+                    class="text-danger">Password is required.</small>
+                  <small *ngIf="signupForm.get('password').touched &&  passLengthError" class="text-danger">Password
+                    length atleast 6 chars.</small>
+                </div>
+                <div class="form-label-group mt-2">
+                  <label for="inputPassword">Confirm Password</label>
+                  <input formControlName='confirmPassword' type="password" id="inputConfirmPassword"
+                    class="form-control" placeholder="Confirm Password" required>
+                  <small *ngIf="signupForm.get('confirmPassword').touched &&  confirmPassError"
+                    class="text-danger">Password and Confirm Password not matched.</small>
+                </div>
+                <button [disabled]="signupForm.invalid || passLengthError || confirmPassError"
+                  class="btn btn-lg btn-primary btn-block text-uppercase mt-2" (click)="signUp()"
+                  type="button">Register</button>
+                <div class="form-label-group mt-2">
+                  <a for="inputPassword" href="javascript:void(0);" (click)="isLoginView=true">Already have account ?
+                    Login
+                    here</a>
+                </div>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div> -->
+
+
+<div class="">
+  <div class="row main-content ">
+    <div class="col-md-4 text-center left_content">
+      <span>
+        <h2><span class="fa fa-user"></span></h2>
+      </span>
+      <!-- <h4 class="company_title">Your Company Logo</h4> -->
+    </div>
+    <div class="col-md-8  login_form cst">
+      <div class="mt-4">
+        <div class="row mt-4">
+          <div class="col mt-4">
+            <h2 class="text-center">{{isLoginView?'Log In':'Sign Up'}}</h2>
+          </div>
+        </div>
+        <div class="row p-4">
+          <div class="col ">
+
+            <form [formGroup]="loginForm">
+
+              <div *ngIf="isLoginView">
+
+                <div class="form-group">
+
+                  <label for="inputEmail">Email </label>
+                  <input formControlName="email" type="text" autocomplete="false" id="inputEmail" class="form-control"
+                    placeholder="Email address" required autofocus>
+                  <small *ngIf="loginForm.get('email').touched && loginForm.get('email').hasError('required')"
+                    class="text-danger">Email is required.</small>
+                  <small *ngIf="loginForm.get('email').touched && loginForm.get('email').hasError('pattern')"
+                    class="text-danger">Enter valid email.</small>
+                </div>
+                <div class="form-group">
+
+                  <label for="inputPassword">Password</label>
+                  <input formControlName="password" type="password" id="inputPassword" class="form-control"
+                    placeholder="Password" required>
+                  <small *ngIf="loginForm.get('password').touched && loginForm.get('password').hasError('required')"
+                    class="text-danger">Password is required.</small>
+                </div>
+                <button [disabled]="loginForm.invalid" class="btn btn-lg btn-primary btn-block text-uppercase mt-2"
+                  (click)="login()" type="button">Sign in</button>
+
+
+              </div>
+            </form>
+            <form [formGroup]="signupForm">
+
+              <div class="" *ngIf="!isLoginView">
+                <div class="row">
+                  <div class="form-group col-6">
+                    <label for="inputEmail">First Name</label>
+                    <input formControlName="firstName" type="text" id="inputFirstName" class="form-control"
+                      placeholder="First Name" required autofocus>
+                    <small
+                      *ngIf="signupForm.get('firstName').touched && signupForm.get('firstName').hasError('required')"
+                      class="text-danger">First name is required.</small>
+                  </div>
+                  <div class="form-group col-6">
+
+                    <label for="inputEmail">Last Name</label>
+                    <input formControlName="lastName" type="text" id="inputLastName" class="form-control"
+                      placeholder="Last Name" required autofocus>
+                    <small *ngIf="signupForm.get('lastName').touched && signupForm.get('lastName').hasError('required')"
+                      class="text-danger">Last name is required.</small>
+                  </div>
+                  <div class="form-group col-6">
+                    <label for="inputEmail">Email </label>
+                    <input formControlName="email" autocomplete="false" type="email" id="inputEmail"
+                      class="form-control" placeholder="Email address" required autofocus>
+                    <small *ngIf="signupForm.get('email').touched && signupForm.get('email').hasError('required')"
+                      class="text-danger">Email is required.</small>
+                    <small *ngIf="signupForm.get('email').touched && signupForm.get('email').hasError('pattern')"
+                      class="text-danger">Enter valid email.</small>
+                  </div>
+                  <div class="form-group col-6">
+                    <label for="inputEmail">Birth date </label>
+                    <input formControlName="dob" autocomplete="false" type="dob" id="inputdob"
+                      class="form-control" placeholder="dob " required autofocus>
+                    <small *ngIf="signupForm.get('dob').touched && signupForm.get('dob').hasError('required')"
+                      class="text-danger"> Birth date is required.</small>
+
+                  </div>
+                  <div class="form-group col-12">
+
+                    <label for="inputAddress">Address</label>
+                    <textarea formControlName='address' type="address" id="inputaddress"
+                      class="form-control" rows="3" placeholder="Address" required></textarea>
+                    <small *ngIf="signupForm.get('address').touched "
+                      class="text-danger">Address required</small>
+                  </div>
+                  <div class="form-group col-6">
+
+                    <label for="inputPassword">Password</label>
+                    <input formControlName="password" type="password" id="inputPassword" class="form-control"
+                      placeholder="Password" required>
+                    <small *ngIf="signupForm.get('password').touched && signupForm.get('password').hasError('required')"
+                      class="text-danger">Password is required.</small>
+                    <small *ngIf="signupForm.get('password').touched &&  passLengthError" class="text-danger">Password
+                      length atleast 6 chars.</small>
+                  </div>
+                  <div class="form-group col-6">
+
+                    <label for="inputPassword">Confirm Password</label>
+                    <input formControlName='confirmPassword' type="password" id="inputConfirmPassword"
+                      class="form-control" placeholder="Confirm Password" required>
+                    <small *ngIf="signupForm.get('confirmPassword').touched &&  confirmPassError"
+                      class="text-danger">Password and Confirm Password not matched.</small>
+                  </div>
+
+                  <button [disabled]="signupForm.invalid || passLengthError || confirmPassError"
+                    class="btn btn-lg btn-primary btn-block text-uppercase mt-2" (click)="signUp()"
+                    type="button">Register</button>
+                </div>
+              </div>
+              <label class="mt-2" *ngIf="isLoginView">Don't have an account? <a href="javascript:void(0);"
+                  (click)="isLoginView=false">Register Here</a></label>
+                  <label class="mt-2"  *ngIf="!isLoginView">Already have account ?
+              <a  for="inputPassword" href="javascript:void(0);"
+                (click)="isLoginView=true">Login Here
+                </a></label>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
