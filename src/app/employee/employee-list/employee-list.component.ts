@@ -82,7 +82,7 @@ export class EmployeeListComponent implements OnInit {
     });
   }
   openConfirm(confirm: TemplateRef<any>, employee, isDeleting) {
-    this.isDeleting = isDeleting
+    this.isDeleting = isDeleting;
     this.selectedEmployee = employee;
     this.deleteModalRef = this.modalService.show(confirm);
   }

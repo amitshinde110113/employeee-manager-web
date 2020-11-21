@@ -4,8 +4,6 @@ import { Router } from '@angular/router';
 import { UserService } from 'src/app/shared/user.service';
 import { AuthService } from 'src/app/shared/auth.service';
 import { ToastrService } from 'ngx-toastr';
-// import { AuthService } from '../shared/auth.service';
-// import { ToastrService } from 'ngx-toastr';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
