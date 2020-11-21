@@ -33,7 +33,7 @@
         <td class="text-center">
           <a href="javascript:void(0);" (click)="openEditEmployeeModel(addEmployeeModal,employee)" data-toggle="tooltip"
             title="Edit" class="mr-2"><i class="fa fa-pencil-square fa-size "></i></a>
-          <a href="javascript:void(0);" (click)="openDeleteConfirm(deleteEmployeeTemplate,employee)"
+          <a href="javascript:void(0);" (click)="openConfirm(deleteEmployeeTemplate,employee,true)"
             data-toggle="tooltip" title="Delete" class="mr-2"><i class="fa fa-trash text-danger fa-size "></i></a>
         </td>
       </tr>
@@ -57,19 +57,18 @@
 <ng-template #deleteEmployeeTemplate>
   <div class="p-1">
     <div class="modal-header p-1">
-      <h2 class="modal-title">Delete employee</h2>
+      <h2 class="modal-title">{{isDeleting?'Delete':'Update'}} employee</h2>
       <button type="button" class="close text-right" data-dismiss="modal"
         (click)="deleteModalRef.hide()">&times;</button>
     </div>
 
 
     <div class="modal-body ">
-      <p class=" mb--4 text-danger">Are you sure you want to delete </p>
-      <small>This action can not be reversed.</small>
+      <p class=" mb--4 text-danger">Are you sure you want to {{isDeleting?'Delete':'Update'}}? </p>
     </div>
     <div class="mt-2">
-      <button type="button" (click)="deleteEmployee()" style="float: right;"
-        class="btn btn-danger btn-sm  mr-2">Delete</button>
+      <button type="button" (click)="isDeleting? deleteEmployee():updateEmployee()" style="float: right;"
+        [ngClass]='isDeleting?"btn btn-danger btn-sm  mr-2":"btn btn-primary btn-sm  mr-2"'>{{isProcessing?'Processing':isDeleting?'Delete':'Update'}}</button>
       <button type="button" style="float: right;" class="btn btn-primary btn-sm  mr-2"
         (click)="deleteModalRef.hide()">Close</button>
     </div>
@@ -130,8 +129,8 @@
       <div class="modal-footer">
         <button class="btn btn-secondary " type="button" (click)="modalRef.hide()">cancel</button>
         <button class="btn btn-primary add-btn " [disabled]="employeeForm.invalid"
-          (click)=" isEdit ? updateEmployee() : addEmployee()"
-          type="button">{{ isProcessing ? 'Processing...' : 'Save' }}</button>
+          (click)=" isEdit ? openConfirm(deleteEmployeeTemplate,selectedEmployee,false) : addEmployee()"
+          type="button">{{ isProcessing ? 'Processing...' :isEdit?'Update': 'Save' }}</button>
       </div>
     </form>
   </div>

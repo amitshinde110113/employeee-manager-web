@@ -19,6 +19,7 @@ export class EmployeeListComponent implements OnInit {
   employeeForm: FormGroup;
   currentUser: any;
   page = 0;
+  isDeleting: boolean;
   totalCount: any;
   employees: any = [];
   isNextDisabled: boolean;
@@ -80,20 +81,28 @@ export class EmployeeListComponent implements OnInit {
 
     });
   }
-  openDeleteConfirm(deleteConfirm: TemplateRef<any>, employee) {
+  openConfirm(confirm: TemplateRef<any>, employee, isDeleting) {
+    this.isDeleting = isDeleting
+    this.selectedEmployee = employee;
+    this.deleteModalRef = this.modalService.show(confirm);
+  }
+  openUpdateConfirm(deleteConfirm: TemplateRef<any>, employee) {
     this.selectedEmployee = employee;
     this.deleteModalRef = this.modalService.show(deleteConfirm);
   }
   deleteEmployee() {
     this.isProcessing = true;
-    this.page = 0
+    this.page = 0;
     this.employeeService.delete(this.selectedEmployee._id).subscribe((employee: any) => {
       this.deleteModalRef.hide();
       this.getEmployees();
       this.isProcessing = false;
+      this.toastr.success( 'Employee deleted succesfully..');
     }, error => {
       this.redirectIfTokenVarificationFailed(error);
       this.isProcessing = false;
+      this.toastr.error(error.error.message || 'Error while deleting employee.');
+
     });
   }
   addEmployee() {
@@ -101,24 +110,33 @@ export class EmployeeListComponent implements OnInit {
     data.user = this.currentUser._id;
     this.isProcessing = true;
     this.employeeService.create(this.employeeForm.value).subscribe((employee: any) => {
-      console.log('employee', employee)
       this.modalRef.hide();
       this.isProcessing = false;
       this.getEmployees();
+      this.toastr.success( 'Employee added succesfully..');
+
     }, error => {
       this.redirectIfTokenVarificationFailed(error);
       this.isProcessing = false;
+      this.toastr.error(error.error.message || 'Error while adding employee.');
+
     });
   }
   updateEmployee() {
     this.isProcessing = true;
     this.employeeService.update(this.employeeForm.value, this.selectedEmployee._id).subscribe((employee: any) => {
+      this.deleteModalRef.hide();
       this.modalRef.hide();
+
       this.getEmployees();
       this.isProcessing = false;
+      this.toastr.success( 'Employee updated succesfully..');
+
     }, error => {
       this.redirectIfTokenVarificationFailed(error);
       this.isProcessing = false;
+      this.toastr.error(error.error.message || 'Error while updating employee.');
+
     });
   }
   redirectIfTokenVarificationFailed(error) {
