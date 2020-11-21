@@ -151,7 +151,7 @@
               <div class="" *ngIf="!isLoginView">
                 <div class="row">
                   <div class="form-group col-6">
-                    <label for="inputEmail">First Name</label>
+                    <label for="inputfirstname">First Name</label>
                     <input formControlName="firstName" type="text" id="inputFirstName" class="form-control"
                       placeholder="First Name" required autofocus>
                     <small
@@ -160,7 +160,7 @@
                   </div>
                   <div class="form-group col-6">
 
-                    <label for="inputEmail">Last Name</label>
+                    <label for="inputlastname">Last Name</label>
                     <input formControlName="lastName" type="text" id="inputLastName" class="form-control"
                       placeholder="Last Name" required autofocus>
                     <small *ngIf="signupForm.get('lastName').touched && signupForm.get('lastName').hasError('required')"
@@ -176,20 +176,29 @@
                       class="text-danger">Enter valid email.</small>
                   </div>
                   <div class="form-group col-6">
-                    <label for="inputEmail">Birth date </label>
-                    <input formControlName="dob" autocomplete="false" type="dob" id="inputdob"
-                      class="form-control" placeholder="dob " required autofocus>
-                    <small *ngIf="signupForm.get('dob').touched && signupForm.get('dob').hasError('required')"
-                      class="text-danger"> Birth date is required.</small>
+                    <label for="inputdob">Birth date </label>
+                    <div class="form-group">
+                      <input type="text" placeholder="Datepicker" formControlName='dob' class="form-control" bsDatepicker
+                        [bsConfig]="{ isAnimated: true }">
 
+                      <small *ngIf="signupForm.get('dob').touched && signupForm.get('dob').hasError('required')"
+                        class="text-danger"> Birth date is required.</small>
+                    </div>
+                  </div>
+                  <div class="form-group col-6">
+
+                    <label for="inputlastname">Company</label>
+                    <input formControlName="company" type="text" id="inputLastName" class="form-control"
+                      placeholder="Last Name" required autofocus>
+                    <small *ngIf="signupForm.get('company').touched && signupForm.get('company').hasError('required')"
+                      class="text-danger">Company is required.</small>
                   </div>
                   <div class="form-group col-12">
 
                     <label for="inputAddress">Address</label>
-                    <textarea formControlName='address' type="address" id="inputaddress"
-                      class="form-control" rows="3" placeholder="Address" required></textarea>
-                    <small *ngIf="signupForm.get('address').touched "
-                      class="text-danger">Address required</small>
+                    <textarea formControlName='address' type="address" id="inputaddress" class="form-control" rows="3"
+                      placeholder="Address" required></textarea>
+                    <small *ngIf="signupForm.get('address').touched  && signupForm.get('address').hasError('required')" class="text-danger">Address required</small>
                   </div>
                   <div class="form-group col-6">
 
@@ -210,16 +219,15 @@
                       class="text-danger">Password and Confirm Password not matched.</small>
                   </div>
 
-                  <button [disabled]="signupForm.invalid || passLengthError || confirmPassError"
+                  <button [disabled]=" signupForm.invalid||passLengthError || confirmPassError"
                     class="btn btn-lg btn-primary btn-block text-uppercase mt-2" (click)="signUp()"
                     type="button">Register</button>
                 </div>
               </div>
               <label class="mt-2" *ngIf="isLoginView">Don't have an account? <a href="javascript:void(0);"
                   (click)="isLoginView=false">Register Here</a></label>
-                  <label class="mt-2"  *ngIf="!isLoginView">Already have account ?
-              <a  for="inputPassword" href="javascript:void(0);"
-                (click)="isLoginView=true">Login Here
+              <label class="mt-2" *ngIf="!isLoginView">Already have account ?
+                <a for="inputPassword" href="javascript:void(0);" (click)="isLoginView=true">Login Here
                 </a></label>
             </form>
           </div>

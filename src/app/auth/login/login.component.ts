@@ -49,6 +49,7 @@ export class LoginComponent implements OnInit {
       email: ['', [Validators.required, Validators.pattern('^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$')]],
       password: ['', Validators.required],
       address: ['', Validators.required],
+      company: ['', Validators.required],
       confirmPassword: ['', Validators.required]
     });
     this.signupForm.get('confirmPassword').valueChanges.subscribe(val => {
@@ -63,7 +64,6 @@ export class LoginComponent implements OnInit {
     });
   }
   login() {
-    this.router.navigate(['employee']);
 
     this.user = this.loginForm.value;
     this.userService.login(this.user).subscribe((res: any) => {
@@ -74,15 +74,27 @@ export class LoginComponent implements OnInit {
       this.router.navigate(['employee']);
       this.toastr.success('Logged In.');
     }, error => {
-      this.toastr.error(error.error.message || 'Error while logging in');
+      console.log('error', error)
+      if (error.status == 404) {
+
+        this.toastr.error('User not found.', error.status);
+      } else {
+        this.toastr.error(error.error.message || 'Error while logging in', error.status);
+
+      }
+      //       status: 404
+      // statusText: "Not Found"
     });
   }
   signUp() {
+    console.log('this.signupForm', this.signupForm)
     if (this.signupForm.value.password !== this.signupForm.value.confirmPassword) {
       this.confirmPassError = true;
       return;
     }
     this.user = this.signupForm.value;
+    console.log('this.user', this.user);
+    // return;
     this.userService.signUp(this.user).subscribe((res) => {
       this.signupForm.reset();
       this.isLoginView = true;

@@ -10,7 +10,9 @@ import { ToastrModule } from 'ngx-toastr';
 import { AuthGuard } from './guard/auth-guard.service';
 import { TokenInterceptor } from './shared/http-Interceptor';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-
+import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
+import { NgxMaskModule, IConfig } from 'ngx-mask';
+export const options: Partial<IConfig> | (() => Partial<IConfig>) = undefined;
 
 @NgModule({
   declarations: [
@@ -24,6 +26,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     HttpClientModule,
     ModalModule.forRoot(),
     ToastrModule.forRoot(),
+    BsDatepickerModule.forRoot(),
+    NgxMaskModule.forRoot(options),
 
   ],
   providers: [HttpClient, AuthGuard, {

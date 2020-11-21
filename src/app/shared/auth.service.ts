@@ -11,7 +11,7 @@ export class AuthService {
   ) { }
   logout() {
     localStorage.clear();
-    this.router.navigate(['login']);
+    this.router.navigate(['auth/login']);
   }
   login() {
     this.isLoggedIn = true;

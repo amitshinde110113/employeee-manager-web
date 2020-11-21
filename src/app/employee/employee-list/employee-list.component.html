@@ -9,11 +9,13 @@
       <button class="btn btn-primary float-right" (click)="openAddEmployeeModel(addEmployeeModal)"> Add New</button>
     </div>
   </div>
+
   <!-- <h2>Striped Rows</h2> -->
   <!-- <p>The .table-striped class adds zebra-stripes to a table:</p> -->
   <table class="table table-striped">
     <thead>
       <tr>
+        <th>ID</th>
         <th>Firstname</th>
         <th>Lastname</th>
         <th>Birth date</th>
@@ -24,25 +26,39 @@
       </tr>
     </thead>
     <tbody>
-      <tr>
-        <td>Firstname</td>
-        <td>Lastname</td>
-        <td>Birth date</td>
-        <td>Mobile</td>
-        <td>City</td>
-        <td>
-          <button type="button" class="close text-right " style="display: inline-block;
+      <tr *ngFor="let employee of employees">
+        <td>{{employee?.empId}}</td>
+        <td>{{employee?.firstName}}</td>
+        <td>{{employee?.lastName}}</td>
+        <td>{{employee?.dob | date:'longDate'}}</td>
+        <td>{{employee?.phone}}</td>
+        <td>{{employee?.city}}</td>
+        <td class="text-center">
+          <a href="javascript:void(0);" (click)="openEditEmployeeModel(addEmployeeModal,employee)" data-toggle="tooltip" title="Edit" class="mr-2"><i class="fa fa-pencil-square fa-size "></i></a>
+          <a href="javascript:void(0);" (click)="openDeleteConfirm(deleteEmployeeTemplate,employee)" data-toggle="tooltip" title="Delete" class="mr-2"><i class="fa fa-trash text-danger fa-size "></i></a>
+
+          <!-- <button type="button" class="close text-right " style="display: inline-block;
           vertical-align: top;  width:45px; color:red" data-toggle="tooltip" title="Delete"
-            (click)="openDeleteConfirm(deleteEmployeeTemplate,'employee')">&times;</button>
+            (click)="openDeleteConfirm(deleteEmployeeTemplate,employee)">&times;</button>
           <button type="button" class="close mr-2" style="display: inline-block;
           vertical-align: top; width: 20px;font-size: 20px;" data-toggle="tooltip" title="Edit"
-            (click)="openEditEmployeeModel(addEmployeeModal,'employee')">Edit</button>
-
+            (click)="openEditEmployeeModel(addEmployeeModal,employee)">Edit</button> -->
         </td>
-
       </tr>
     </tbody>
   </table>
+  <div *ngIf="employees?.length==0" class="col-12 p-4 text-center">
+    Its look like you havent added any employee yet.
+  </div>
+  <div class="row " *ngIf="totalCount>10">
+    <div class="col-2">
+      <button class="btn btn-info float-left btn-sm" [disabled]='page==0' (click)="page=page-1;getEmployees()">Prev</button>
+    </div>
+    <div class="col-8"></div>
+    <div class="col-2">
+      <button class="btn btn-info float-right btn-sm" [disabled]="isNextDisabled" (click)="page=page+1;getEmployees()">Next</button>
+    </div>
+  </div>
 </div>
 <ng-template #deleteEmployeeTemplate>
   <div class="p-1">
@@ -95,9 +111,19 @@
         </div>
         <div class="form-group  ">
           <label>Phone</label>
-          <input class=' form-control' type='text' placeholder="Phone" formControlName="phone">
+          <input mask="000 000 00 00" class=' form-control' type='text' placeholder="Phone" formControlName="phone">
           <small *ngIf="employeeForm.get('phone').touched && employeeForm.get('phone').hasError('required')"
             class="text-danger">Phone is required.</small>
+        </div>
+        <div class="form-group">
+          <label for="inputdob">Birth date </label>
+          <div class="form-group">
+            <input type="text" placeholder="Datepicker" formControlName='dob' class="form-control" bsDatepicker
+              [bsConfig]="{ isAnimated: true }">
+
+            <small *ngIf="employeeForm.get('dob').touched && employeeForm.get('dob').hasError('required')"
+              class="text-danger"> Birth date is required.</small>
+          </div>
         </div>
         <div class="form-group  ">
           <label> Address</label>

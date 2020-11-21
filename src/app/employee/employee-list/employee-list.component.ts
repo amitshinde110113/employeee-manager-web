@@ -12,7 +12,7 @@ import { ToastrService } from 'ngx-toastr';
 })
 export class EmployeeListComponent implements OnInit {
   isEdit: boolean;
-  selectedEmployee: {};
+  selectedEmployee: any = {};
   modalRef: BsModalRef;
   isProcessing: boolean;
   deleteModalRef: BsModalRef;
@@ -69,20 +69,56 @@ export class EmployeeListComponent implements OnInit {
     this.modalRef = this.modalService.show(editEmployee);
   }
   patchValueToEmployeeForm() {
-    // throw new Error("Method not implemented.");
+    this.employeeForm.patchValue({
+      firstName: this.selectedEmployee.firstName,
+      lastName: this.selectedEmployee.lastName,
+      dob:new Date( this.selectedEmployee.dob),
+      address: this.selectedEmployee.address,
+      city: this.selectedEmployee.city,
+      phone: this.selectedEmployee.phone,
+
+    });
   }
   openDeleteConfirm(deleteConfirm: TemplateRef<any>, employee) {
     this.selectedEmployee = employee;
     this.deleteModalRef = this.modalService.show(deleteConfirm);
   }
   deleteEmployee() {
-
+    this.isProcessing = true;
+    this.page=0
+    this.employeeService.delete(this.selectedEmployee._id).subscribe((employee: any) => {
+      this.deleteModalRef.hide();
+      this.getEmployees();
+      this.isProcessing = false;
+    }, error => {
+      this.redirectIfTokenVarificationFailed(error);
+      this.isProcessing = false;
+    });
   }
   addEmployee() {
-
+    const data = this.employeeForm.value;
+    data.user = this.currentUser._id;
+    this.isProcessing = true;
+    this.employeeService.create(this.employeeForm.value).subscribe((employee: any) => {
+      console.log('employee', employee)
+      this.modalRef.hide();
+      this.isProcessing = false;
+      this.getEmployees();
+    }, error => {
+      this.redirectIfTokenVarificationFailed(error);
+      this.isProcessing = false;
+    });
   }
   updateEmployee() {
-
+    this.isProcessing = true;
+    this.employeeService.update(this.employeeForm.value, this.selectedEmployee._id).subscribe((employee: any) => {
+      this.modalRef.hide();
+      this.getEmployees();
+      this.isProcessing = false;
+    }, error => {
+      this.redirectIfTokenVarificationFailed(error);
+      this.isProcessing = false;
+    });
   }
   redirectIfTokenVarificationFailed(error) {
     if (error.status === 498) {

@@ -5,6 +5,8 @@ import { EmployeeRoutingModule } from './employee-routing.module';
 import { EmployeeListComponent } from './employee-list/employee-list.component';
 import { AppHeaderComponent } from './app-header/app-header.component';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
+import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
+import { NgxMaskModule, IConfig } from 'ngx-mask';
 
 @NgModule({
   declarations: [EmployeeListComponent, AppHeaderComponent],
@@ -12,7 +14,10 @@ import { ReactiveFormsModule, FormsModule } from '@angular/forms';
     CommonModule,
     EmployeeRoutingModule,
     ReactiveFormsModule,
-    FormsModule
+    FormsModule,
+    BsDatepickerModule.forRoot(),
+    NgxMaskModule.forRoot(),
+
   ]
 })
 export class EmployeeModule { }
