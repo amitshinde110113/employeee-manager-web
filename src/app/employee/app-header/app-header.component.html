@@ -8,8 +8,8 @@
     <ul class="navbar-nav mr-auto">
     </ul>
     <form class="form-inline my-2 my-lg-0">
-      <h4 class="mr-4 " style="color: white;"><strong>Hello {{currentUser?.firstName}}</strong></h4>
-      <button class="btn btn-outline-success my-2 my-sm-0" (click)="authService.logout()" type="button">Logout</button>
+      <h4 class="mr-4 " style="color: white;"><strong>Hello {{currentUser?.firstName |titlecase}}</strong></h4>
+      <button class="btn btn-outline-danger my-2 my-sm-0" (click)="authService.logout()" type="button">Logout</button>
     </form>
   </div>
 </nav>

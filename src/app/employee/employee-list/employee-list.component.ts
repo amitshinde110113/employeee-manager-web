@@ -22,6 +22,7 @@ export class EmployeeListComponent implements OnInit {
   totalCount: any;
   employees: any = [];
   isNextDisabled: boolean;
+  maxDate = new Date();
   constructor(
     private fb: FormBuilder,
     private modalService: BsModalService,
@@ -72,7 +73,7 @@ export class EmployeeListComponent implements OnInit {
     this.employeeForm.patchValue({
       firstName: this.selectedEmployee.firstName,
       lastName: this.selectedEmployee.lastName,
-      dob:new Date( this.selectedEmployee.dob),
+      dob: new Date(this.selectedEmployee.dob),
       address: this.selectedEmployee.address,
       city: this.selectedEmployee.city,
       phone: this.selectedEmployee.phone,
@@ -85,7 +86,7 @@ export class EmployeeListComponent implements OnInit {
   }
   deleteEmployee() {
     this.isProcessing = true;
-    this.page=0
+    this.page = 0
     this.employeeService.delete(this.selectedEmployee._id).subscribe((employee: any) => {
       this.deleteModalRef.hide();
       this.getEmployees();

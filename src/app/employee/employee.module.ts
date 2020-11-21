@@ -7,6 +7,7 @@ import { AppHeaderComponent } from './app-header/app-header.component';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 import { NgxMaskModule, IConfig } from 'ngx-mask';
+export const options: Partial<IConfig> | (() => Partial<IConfig>) = undefined;
 
 @NgModule({
   declarations: [EmployeeListComponent, AppHeaderComponent],
@@ -16,7 +17,7 @@ import { NgxMaskModule, IConfig } from 'ngx-mask';
     ReactiveFormsModule,
     FormsModule,
     BsDatepickerModule.forRoot(),
-    NgxMaskModule.forRoot(),
+    NgxMaskModule.forRoot(options),
 
   ]
 })

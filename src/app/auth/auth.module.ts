@@ -6,6 +6,7 @@ import { LoginComponent } from './login/login.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 import { NgxMaskModule, IConfig } from 'ngx-mask';
+export const options: Partial<IConfig> | (() => Partial<IConfig>) = undefined;
 
 @NgModule({
   declarations: [LoginComponent],
@@ -14,7 +15,7 @@ import { NgxMaskModule, IConfig } from 'ngx-mask';
     AuthRoutingModule,
     ReactiveFormsModule,
     BsDatepickerModule.forRoot(),
-    NgxMaskModule.forRoot()
+    NgxMaskModule.forRoot(options)
   ]
 })
 export class AuthModule { }

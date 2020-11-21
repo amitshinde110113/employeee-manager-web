@@ -12,14 +12,15 @@ import { ToastrService } from 'ngx-toastr';
   styleUrls: ['./login.component.scss']
 })
 export class LoginComponent implements OnInit {
-  // user: IUser;
+
   passLengthError = false;
   isLoginView = true;
   loginForm: FormGroup;
   signupForm: FormGroup;
   confirmPassError = false;
   user: any;
-
+  processing: boolean;
+  maxDate = new Date();
   constructor(
     private fb: FormBuilder,
     private userService: UserService,
@@ -66,6 +67,8 @@ export class LoginComponent implements OnInit {
   login() {
 
     this.user = this.loginForm.value;
+    this.processing = true;
+
     this.userService.login(this.user).subscribe((res: any) => {
       this.authService.login();
       this.loginForm.reset();
@@ -73,34 +76,33 @@ export class LoginComponent implements OnInit {
       localStorage.setItem('token', JSON.stringify(res.token));
       this.router.navigate(['employee']);
       this.toastr.success('Logged In.');
+      this.processing = false;
     }, error => {
-      console.log('error', error)
       if (error.status == 404) {
-
         this.toastr.error('User not found.', error.status);
       } else {
         this.toastr.error(error.error.message || 'Error while logging in', error.status);
-
+        this.processing = false;
       }
-      //       status: 404
-      // statusText: "Not Found"
     });
   }
   signUp() {
-    console.log('this.signupForm', this.signupForm)
     if (this.signupForm.value.password !== this.signupForm.value.confirmPassword) {
       this.confirmPassError = true;
       return;
     }
     this.user = this.signupForm.value;
-    console.log('this.user', this.user);
-    // return;
+    this.processing = true;
     this.userService.signUp(this.user).subscribe((res) => {
       this.signupForm.reset();
       this.isLoginView = true;
+      this.processing = false;
+
       this.toastr.success('User registered successfully.');
     }, error => {
       this.toastr.error(error.error.message || 'Error');
+      this.processing = false;
+
     });
   }
 }

@@ -9,9 +9,6 @@
       <button class="btn btn-primary float-right" (click)="openAddEmployeeModel(addEmployeeModal)"> Add New</button>
     </div>
   </div>
-
-  <!-- <h2>Striped Rows</h2> -->
-  <!-- <p>The .table-striped class adds zebra-stripes to a table:</p> -->
   <table class="table table-striped">
     <thead>
       <tr>
@@ -28,21 +25,16 @@
     <tbody>
       <tr *ngFor="let employee of employees">
         <td>{{employee?.empId}}</td>
-        <td>{{employee?.firstName}}</td>
-        <td>{{employee?.lastName}}</td>
+        <td>{{employee?.firstName|titlecase}}</td>
+        <td>{{employee?.lastName|titlecase}}</td>
         <td>{{employee?.dob | date:'longDate'}}</td>
         <td>{{employee?.phone}}</td>
-        <td>{{employee?.city}}</td>
+        <td>{{employee?.city |titlecase}}</td>
         <td class="text-center">
-          <a href="javascript:void(0);" (click)="openEditEmployeeModel(addEmployeeModal,employee)" data-toggle="tooltip" title="Edit" class="mr-2"><i class="fa fa-pencil-square fa-size "></i></a>
-          <a href="javascript:void(0);" (click)="openDeleteConfirm(deleteEmployeeTemplate,employee)" data-toggle="tooltip" title="Delete" class="mr-2"><i class="fa fa-trash text-danger fa-size "></i></a>
-
-          <!-- <button type="button" class="close text-right " style="display: inline-block;
-          vertical-align: top;  width:45px; color:red" data-toggle="tooltip" title="Delete"
-            (click)="openDeleteConfirm(deleteEmployeeTemplate,employee)">&times;</button>
-          <button type="button" class="close mr-2" style="display: inline-block;
-          vertical-align: top; width: 20px;font-size: 20px;" data-toggle="tooltip" title="Edit"
-            (click)="openEditEmployeeModel(addEmployeeModal,employee)">Edit</button> -->
+          <a href="javascript:void(0);" (click)="openEditEmployeeModel(addEmployeeModal,employee)" data-toggle="tooltip"
+            title="Edit" class="mr-2"><i class="fa fa-pencil-square fa-size "></i></a>
+          <a href="javascript:void(0);" (click)="openDeleteConfirm(deleteEmployeeTemplate,employee)"
+            data-toggle="tooltip" title="Delete" class="mr-2"><i class="fa fa-trash text-danger fa-size "></i></a>
         </td>
       </tr>
     </tbody>
@@ -52,11 +44,13 @@
   </div>
   <div class="row " *ngIf="totalCount>10">
     <div class="col-2">
-      <button class="btn btn-info float-left btn-sm" [disabled]='page==0' (click)="page=page-1;getEmployees()">Prev</button>
+      <button class="btn btn-primary float-left btn-sm" [disabled]='page==0'
+        (click)="page=page-1;getEmployees()">Prev</button>
     </div>
     <div class="col-8"></div>
     <div class="col-2">
-      <button class="btn btn-info float-right btn-sm" [disabled]="isNextDisabled" (click)="page=page+1;getEmployees()">Next</button>
+      <button class="btn btn-primary float-right btn-sm" [disabled]="isNextDisabled"
+        (click)="page=page+1;getEmployees()">Next</button>
     </div>
   </div>
 </div>
@@ -119,7 +113,7 @@
           <label for="inputdob">Birth date </label>
           <div class="form-group">
             <input type="text" placeholder="Datepicker" formControlName='dob' class="form-control" bsDatepicker
-              [bsConfig]="{ isAnimated: true }">
+              [bsConfig]="{ isAnimated: true ,maxDate:maxDate}">
 
             <small *ngIf="employeeForm.get('dob').touched && employeeForm.get('dob').hasError('required')"
               class="text-danger"> Birth date is required.</small>
