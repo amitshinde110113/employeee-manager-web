@@ -21,7 +21,7 @@
         <th>Actions</th>
       </tr>
     </thead>
-    <tbody>
+    <tbody *ngIf="!isProcessing">
       <tr *ngFor="let employee of employees">
         <td>{{employee?.empId}}</td>
         <td>{{employee?.firstName|titlecase}}</td>
@@ -38,8 +38,11 @@
       </tr>
     </tbody>
   </table>
-  <div *ngIf="employees?.length==0" class="col-12 p-4 text-center">
+  <div *ngIf="employees?.length==0 && !isProcessing" class="col-12 p-4 text-center">
     Its look like you havent added any employee yet.
+  </div>
+  <div *ngIf="isProcessing" class="col-12 p-4 text-center">
+    Loading...
   </div>
   <div class="row " *ngIf="totalCount>10">
     <div class="col-2">

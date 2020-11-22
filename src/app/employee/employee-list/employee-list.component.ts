@@ -37,13 +37,18 @@ export class EmployeeListComponent implements OnInit {
     this.getEmployees();
   }
   getEmployees() {
+    this.isProcessing = true;
     this.employeeService.getAll(this.page).subscribe((employees: any) => {
       this.employees = employees.employees;
       this.totalCount = employees.totalCount;
       this.isNextDisabled = (this.page + 1) * 10 >= this.totalCount ? true : false;
+      this.isProcessing = false;
+
     }, error => {
       this.redirectIfTokenVarificationFailed(error);
       this.toastr.error(error.error.message || 'Error while getting employees.');
+      this.isProcessing = false;
+
     });
   }
   openAddEmployeeModel(addEmployee: TemplateRef<any>) {
@@ -97,7 +102,7 @@ export class EmployeeListComponent implements OnInit {
       this.deleteModalRef.hide();
       this.getEmployees();
       this.isProcessing = false;
-      this.toastr.success( 'Employee deleted succesfully..');
+      this.toastr.success('Employee deleted succesfully..');
     }, error => {
       this.redirectIfTokenVarificationFailed(error);
       this.isProcessing = false;
@@ -113,7 +118,7 @@ export class EmployeeListComponent implements OnInit {
       this.modalRef.hide();
       this.isProcessing = false;
       this.getEmployees();
-      this.toastr.success( 'Employee added succesfully..');
+      this.toastr.success('Employee added succesfully..');
 
     }, error => {
       this.redirectIfTokenVarificationFailed(error);
@@ -130,7 +135,7 @@ export class EmployeeListComponent implements OnInit {
 
       this.getEmployees();
       this.isProcessing = false;
-      this.toastr.success( 'Employee updated succesfully..');
+      this.toastr.success('Employee updated succesfully..');
 
     }, error => {
       this.redirectIfTokenVarificationFailed(error);
