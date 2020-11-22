@@ -19,7 +19,7 @@
                 <div class="form-group">
                   <label for="inputEmail">Email </label>
                   <input formControlName="email" type="text" autocomplete="false" id="inputEmail" class="form-control"
-                    placeholder="Email address" required autofocus>
+                    placeholder="Email address">
                   <small *ngIf="loginForm.get('email').touched && loginForm.get('email').hasError('required')"
                     class="text-danger">Email is required.</small>
                   <small *ngIf="loginForm.get('email').touched && loginForm.get('email').hasError('pattern')"
@@ -42,7 +42,7 @@
                   <div class="form-group col-6">
                     <label for="inputfirstname">First Name</label>
                     <input formControlName="firstName" type="text" id="inputFirstName" class="form-control"
-                      placeholder="First Name" required autofocus>
+                      placeholder="First Name">
                     <small
                       *ngIf="signupForm.get('firstName').touched && signupForm.get('firstName').hasError('required')"
                       class="text-danger">First name is required.</small>
@@ -50,14 +50,14 @@
                   <div class="form-group col-6">
                     <label for="inputlastname">Last Name</label>
                     <input formControlName="lastName" type="text" id="inputLastName" class="form-control"
-                      placeholder="Last Name" required autofocus>
+                      placeholder="Last Name">
                     <small *ngIf="signupForm.get('lastName').touched && signupForm.get('lastName').hasError('required')"
                       class="text-danger">Last name is required.</small>
                   </div>
                   <div class="form-group col-6">
                     <label for="inputEmail">Email </label>
                     <input formControlName="email" autocomplete="false" type="email" id="inputEmail"
-                      class="form-control" placeholder="Email address" required autofocus>
+                      class="form-control" placeholder="Email address">
                     <small *ngIf="signupForm.get('email').touched && signupForm.get('email').hasError('required')"
                       class="text-danger">Email is required.</small>
                     <small *ngIf="signupForm.get('email').touched && signupForm.get('email').hasError('pattern')"
@@ -73,9 +73,9 @@
                     </div>
                   </div>
                   <div class="form-group col-6">
-                    <label for="inputlastname">Company</label>
-                    <input formControlName="company" type="text" id="inputLastName" class="form-control"
-                      placeholder="Last Name" required autofocus>
+                    <label for="inputCompany">Company</label>
+                    <input formControlName="company" type="text" id="inputCompany" class="form-control"
+                      placeholder="Last Name">
                     <small *ngIf="signupForm.get('company').touched && signupForm.get('company').hasError('required')"
                       class="text-danger">Company is required.</small>
                   </div>

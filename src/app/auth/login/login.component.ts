@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { UserService } from 'src/app/shared/user.service';
 import { AuthService } from 'src/app/shared/auth.service';
 import { ToastrService } from 'ngx-toastr';
+import { FormValidator } from 'src/app/shared/form-validators/form-validators';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -34,22 +35,22 @@ export class LoginComponent implements OnInit {
   }
   buildLoginForm() {
     this.loginForm = this.fb.group({
-      email: ['', [Validators.required, Validators.pattern('^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$')]],
-      password: ['', Validators.required]
+      email: ['', [FormValidator.isRequired(), Validators.pattern('^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$')]],
+      password: ['', FormValidator.isRequired()]
     });
 
 
   }
   buildSignupForm() {
     this.signupForm = this.fb.group({
-      firstName: ['', Validators.required],
-      lastName: ['', Validators.required],
-      dob: [null, Validators.required],
-      email: ['', [Validators.required, Validators.pattern('^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$')]],
-      password: ['', Validators.required],
-      address: ['', Validators.required],
-      company: ['', Validators.required],
-      confirmPassword: ['', Validators.required]
+      firstName: ['', FormValidator.isRequired()],
+      lastName: ['', FormValidator.isRequired()],
+      dob: [null, FormValidator.isRequired()],
+      email: ['', [FormValidator.isRequired(), Validators.pattern('^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$')]],
+      password: ['', FormValidator.isRequired()],
+      address: ['', FormValidator.isRequired()],
+      company: ['', FormValidator.isRequired()],
+      confirmPassword: ['', FormValidator.isRequired()]
     });
     this.signupForm.get('confirmPassword').valueChanges.subscribe(val => {
       if (this.signupForm.value.password) {

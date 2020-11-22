@@ -4,6 +4,7 @@ import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { EmployeeService } from 'src/app/shared/employee.service';
 import { AuthService } from 'src/app/shared/auth.service';
 import { ToastrService } from 'ngx-toastr';
+import { FormValidator } from 'src/app/shared/form-validators/form-validators';
 
 @Component({
   selector: 'app-employee-list',
@@ -59,12 +60,12 @@ export class EmployeeListComponent implements OnInit {
   }
   buildEmployeeForm() {
     this.employeeForm = this.fb.group({
-      firstName: ['', Validators.required],
-      lastName: ['', Validators.required],
-      dob: [null, Validators.required],
-      address: ['', Validators.required],
-      city: ['', Validators.required],
-      phone: ['', Validators.required],
+      firstName: ['', FormValidator.isRequired()],
+      lastName: ['', FormValidator.isRequired()],
+      dob: [null, FormValidator.isRequired()],
+      address: ['', FormValidator.isRequired()],
+      city: ['', FormValidator.isRequired()],
+      phone: ['', FormValidator.isRequired()],
 
     });
   }
